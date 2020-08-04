@@ -15,6 +15,8 @@ const port = argv.port || 9000
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
 
+const DIST_DIR = 'docs'
+
 function styles() {
   return src('app/styles/*.scss', {
     sourcemaps: !isProd,
@@ -87,33 +89,33 @@ function html() {
         })
       )
     )
-    .pipe(dest('dist'))
+    .pipe(dest(DIST_DIR))
 }
 
 function images() {
   return src('app/images/**/*', { since: lastRun(images) })
     .pipe($.imagemin())
-    .pipe(dest('dist/images'))
+    .pipe(dest(`${DIST_DIR}/images`))
 }
 
 function fonts() {
   return src('app/fonts/**/*.{eot,svg,ttf,woff,woff2}').pipe(
-    $.if(!isProd, dest('.tmp/fonts'), dest('dist/fonts'))
+    $.if(!isProd, dest('.tmp/fonts'), dest(`${DIST_DIR}/fonts`))
   )
 }
 
 function extras() {
   return src(['app/*', '!app/*.html'], {
     dot: true,
-  }).pipe(dest('dist'))
+  }).pipe(dest(DIST_DIR))
 }
 
 function clean() {
-  return del(['.tmp', 'dist'])
+  return del(['.tmp', DIST_DIR])
 }
 
 function measureSize() {
-  return src('dist/**/*').pipe($.size({ title: 'build', gzip: true }))
+  return src(`${DIST_DIR}/**/*`).pipe($.size({ title: 'build', gzip: true }))
 }
 
 const build = series(
@@ -155,7 +157,7 @@ function startDistServer() {
     notify: false,
     port,
     server: {
-      baseDir: 'dist',
+      baseDir: DIST_DIR,
       routes: {
         '/node_modules': 'node_modules',
       },
