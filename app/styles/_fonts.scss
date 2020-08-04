@@ -1,0 +1,13 @@
+$fontFamily: 'Kingthings Petrock';
+
+@font-face {
+  font-family: $fontFamily;
+  font-weight: normal;
+  src: url(../fonts/Kingthings_Petrock_light-webfont.woff);
+}
+
+@font-face {
+  font-family: $fontFamily;
+  font-weight: bold;
+  src: url(../fonts/Kingthings_Petrock-webfont.woff);
+}

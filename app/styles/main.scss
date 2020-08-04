@@ -1,0 +1,26 @@
+@import 'colors';
+@import 'fonts';
+@import 'reset';
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  background-color: $nieddu;
+  color: $lmdur3;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: $fontFamily, Georgia, serif;
+  font-size: 2em;
+  justify-content: center;
+}
+
+.soon {
+  color: $winternight;
+  text-transform: uppercase;
+}
